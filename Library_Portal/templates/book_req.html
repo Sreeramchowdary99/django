@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+{% block body %}
+  <h1> Book Requests </h1>
+
+
+    {%if session['req']==1%}
+    <table>
+    <tr>
+      <th>Student ID &nbsp &nbsp</th>
+      <th>&nbsp &nbsp ISBN </th>
+    </tr>
+      {% for req in Requests %}
+        <tr>
+          <th>{{req.studentid}} &nbsp &nbsp</th>
+          <th>{{ req.isbn}} &nbsp &nbsp</th>
+          <th><a href="/approve/{{req.studentid}}/{{req.isbn}}">Approve &nbsp &nbsp</a></th>
+          <th><a href="/decline/{{req.studentid}}/{{req.isbn}}">Decline </a></th>
+        </tr>
+      {% endfor %}
+    </table>
+    {%else%}
+      <p> No Requests</p>
+    {%endif%}
+
+{% endblock %}

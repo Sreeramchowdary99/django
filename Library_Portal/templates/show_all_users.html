@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+  <h1> All Users </h1>
+  <table>
+    <tr>
+      <th><h3>ID</h3></th>
+      <th><h3>Username</h3></th>
+      <th><h3> Email </h3></th>
+    </tr>
+    {% for book in Students %}
+      <tr>
+       <th><a href="/user/{{book.id}}">{{book.id}} &nbsp &nbsp</a></th>
+       <th>{{ book.username }} &nbsp &nbsp</th>
+       <th>{{ book.email }}</th>
+     </tr>
+    {% endfor %}
+  </table>
+{% endblock %}

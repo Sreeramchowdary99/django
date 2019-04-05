@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<h1> Book Data </h1><br>
+<strong>Title:</strong> {{res[1]}}<br>
+<strong>Author:</strong>{{res[0]}}<br>
+<strong>Ratings:</strong>{{res[2]}}<br>
+<strong> No. Of Copies Available: </strong> {{res[3]}}<br>
+<strong>ISBN:</strong>{{res[4]}}<br>
+
+{%if session['usertype']=='students'%}
+  <a href="{{'/books/%s/req'%res[4]}}"> Request </a>
+{%else%}
+  <a href= "/remove_book/{{res[4]}}"> Remove Book </a>
+{%endif%}
+{% if comm==0 %}
+  <p> No comments are available for this book </p>
+{%else%}
+<h2> Comments </h2>
+  {% for comment in comm %}
+  <div class="jumbotron">
+    <p > Comment added by: {{comment[3]}} <br>
+      Comment: {{comment[1]}} <br>
+      {%if session.usertype=='admins'%}
+      <a href="/delete_comment/{{res[4]}}/{{comment[0]}}"> Delete Comment </a>
+      {%endif%}
+    </p>
+  </div>
+  {%endfor%}
+{%endif%}
+
+<form class="form-inline" role="form" action="" method="POST" style="width:100%" >
+  <div class="form-group" >
+    <input class="form-control" type="text" name="comment" placeholder ="Your Comments" />
+  </div>
+  <div class="form-group">
+    <button class="btn btn-default"> Add Comment </button>
+  </div>
+</form>
+
+
+{% endblock %}

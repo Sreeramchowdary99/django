@@ -1,0 +1,49 @@
+{% extends 'layout.html' %}
+{% block body %}
+  <h1> User Information </h1>
+  <h2> Books Taken </h2>
+  {%if issue_check==1%}
+  <table>
+    <tr>
+      <th><h3>Title</h3></th>
+      <th><h3>Author</h3> </th>
+      <th><h3> ISBN &nbsp</h3></th>
+      <th><h3>Penalty &nbsp</h3></th>
+      <th><h3>DaysLeft </h3> </th>
+    </tr>
+    {%for issue in Issue%}
+    <tr>
+      <th> {{issue.title}} &nbsp &nbsp</th>
+      <th> {{issue.author}} &nbsp </th>
+      <th> {{issue.isbn}} &nbsp &nbsp </th>
+      <th> &nbsp &nbsp &nbsp &nbsp {{issue.days}} </th>
+      <th>&nbsp &nbsp &nbsp &nbsp {{issue.penal}} </th>
+    </tr>
+      {%endfor%}
+    </table>
+  {%else%}
+    <p> No books Issued </p>
+  {%endif%}
+  <h2> Issue History </h2>
+  {%if issue_history_check==1%}
+  <table>
+    <tr>
+      <th><h3>Title</h3></th>
+      <th><h3>Author</h3> </th>
+      &nbsp&nbsp
+      <th><h3> ISBN </h3></th>
+    </tr>
+  {%for issue in Issue_history%}
+  <tr>
+    <th> {{issue.title}} &nbsp &nbsp</th>
+    <th> {{issue.author}} &nbsp </th>
+    <th> {{issue.isbn}} </th>
+  </tr>
+  {%endfor%}
+  {%else%}
+  <p> No issue history </p>
+  {%endif%}
+  {%if session.usertype=='admins'%}
+    <a href="/remove_user/{{studid}}"> Remove User </a>
+  {%endif%}
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+  <h1>User Search</h1>
+  {% from "includes/_formhelpers.html" import render_field %}
+  <form method="POST" action="">
+    <div class="form-group">
+      {{render_field(form.email, class_="form-control")}}
+    </div>
+    <p><input type="submit" class="btn btn-primary" value="Submit"></p>
+  </form>
+
+  {%if check==1%}
+  <table>
+  <tr>
+    <th> StudentID </th>
+    <th> UserName </th>
+    <th> Email </th>
+    <tr>
+      <th> {{res[0]}} </th>
+      <th> <a href="/user/{{res[0]}}">{{res[1]}} </th>
+      <th> {{res[4]}} </th>
+    </tr>
+  </table>
+  {%endif%}
+{% endblock %}
